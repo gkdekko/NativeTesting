@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<script>
+    
+function notify(eventName) {
+    window.external.notify(eventName);
+}
+
+function deviceList(deviceArr) {
+    let devices = document.getElementById('devices');
+    let ds = document.getElementById('test1');
+    ds.innerHTML = JSON.parse(deviceArr);
+    let list = JSON.parse(deviceArr);
+    let ta = document.getElementById('textarea');
+    ta.innerText = JSON.stringify(deviceArr)+" "+typeof(list);
+
+    index=0;
+    for(element in Object.values(list))
+    {
+       var opt = document.createElement("option");
+       opt.value= list[element];
+       opt.innerHTML = list[element] ; // whatever property it has
+
+       // then append it to the select element
+       devices.appendChild(opt);
+       index++;
+    }
+}
+
+window.onload = notify("loading");
+
+</script>
+<div class="text-center">
+    <h1 id="test1" class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div>
+    <button id="activateCamera" onclick="notify('activate_camera')">activate</button>
+    <select name="devices" id="devices">
+
+    </select>
+</div>
+
+@*
+<div>
+    <button id="getDevices" onclick="notify('getdevices')">Get Devices</button>
+</div>*@
+
+<div>
+    <textarea id="textarea">
+        
+    </textarea>
+</div>
